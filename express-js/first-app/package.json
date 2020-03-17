@@ -1,0 +1,15 @@
+{
+  "name": "first-app",
+  "version": "1.0.0",
+  "description": "Some simple web-app to test Express routes",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Davoleo",
+  "license": "ISC"
+}

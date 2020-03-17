@@ -20,3 +20,9 @@ Used to: install js libraries on node (server-side)<br>
 - Lightweight (Does few things by itself)
 
  _(the library is just a collection of different features)_
+ 
+ #### package.json
+ - it's a file where all the metadata about the project is saved
+ - it also contains all the dependencies with their own compatibile versions
+ - the `--save` flag makes npm automatically create the package.json file while installing a package
+ - the `npm init` command manually creates the package.json file with all the info
