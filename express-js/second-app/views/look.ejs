@@ -1,1 +1,12 @@
+<!-- 3 different EJS tags  -->
+<!-- <% %>  Just runs the js code without rendering anything -->
+<!-- <%= %> Whatever the js code returns will be rendered on the page -->
+<!-- <%- %> -->
+
 <h1>You're looking at <%= thing %> over the mighty mountains</h1>
+
+<% if (thing.toLowerCase() === "wolf") { %>
+    <p>SUPERB CHOICE! WOLFS ARE FUCKING AWESOME!</p>
+<% } else { %>
+    <p>good, but could be better</p>
+<% } %>
