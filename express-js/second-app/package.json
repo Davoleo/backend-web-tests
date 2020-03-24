@@ -1,0 +1,16 @@
+{
+  "name": "second-app",
+  "version": "1.0.0",
+  "description": "An Express Intermediate app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Davoleo",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  }
+}

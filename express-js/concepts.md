@@ -23,7 +23,7 @@ Used to: install js libraries on node (server-side)<br>
 
  _(the library is just a collection of different features)_
  
- #### package.json
+#### package.json
  - it's a file where all the metadata about the project is saved
  - it also contains all the dependencies with their own compatibile versions
  - the `--save` flag makes npm automatically create the package.json file while installing a package
@@ -33,3 +33,8 @@ Used to: install js libraries on node (server-side)<br>
 - Used in Express to intercept http request and doing something in response
 - Route parameters allows to create patterns for custom routes
 - The * route matches every request that wasn't specified before
+
+#### Rendering HTML and Templates
+- `res.render()` Renders HTML from an EJS file
+- EJS (?)
+- EJS Templates and variables
