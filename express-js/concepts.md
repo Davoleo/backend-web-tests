@@ -38,3 +38,7 @@ Used to: install js libraries on node (server-side)<br>
 - `res.render()` Renders HTML from an EJS file
 - EJS (?)
 - EJS Templates and variables
+
+#### POST Requests
+- Post Routes
+- Body Parser

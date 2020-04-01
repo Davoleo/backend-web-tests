@@ -1,0 +1,17 @@
+<%- include("partials/header") %>
+
+<h1>Waifu List</h1>
+
+<% waifus.forEach((waifu) => { %>
+    <li><%= waifu %></li>
+<% }); %>
+
+<br><hr><br>
+<form action="/addwaifu" method="post">
+    <input name="name" type="text" placeholder="Name of the Waifu">
+    <input type="submit" value="ADD">
+</form>
+
+<br>
+
+<%- include("partials/footer") %>

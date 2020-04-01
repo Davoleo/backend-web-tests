@@ -5,10 +5,14 @@
 let express = require("express");
 let app = express();
 
+let bodyParser = require("body-parser");
+
 //Serves the content of the 'public' directory with the rest of the app
 app.use(express.static("public"));
 //Sets EJS as the default template language for the app
 app.set("view engine", "ejs");
+//Install the post request body parser into Express
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Rendering a plain HTML/EJS file
 app.get("/", function (req, res) {
@@ -33,6 +37,25 @@ app.get("/posts", function (req, res) {
     res.render("posts.ejs", {posts: posts})
 });
 
+//Waifu list
+let waifus = [
+    "Ryuko Matoi",
+    "Meia Gisborn",
+    "Rem",
+    "Yuki Nagato",
+    "Hifumi Takimoto"
+];
+
+app.get("/waifus", function (req, res) {
+    res.render("waifus", {waifus: waifus});
+});
+
+//Example of a POST route
+app.post("/addwaifu", function (req, res) {
+    let newWaifu = req.body.name;
+    waifus.push(newWaifu);
+    res.redirect("/waifus")
+});
 
 
 app.listen(3333, function () {
