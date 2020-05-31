@@ -1,6 +1,6 @@
 ## Intro to Node
 
-- Allows to run Javascript code on the server-side
+- Allows running Javascript code server-side
     - High Performance
     - npm
     - Javascript \-.\-
@@ -25,13 +25,13 @@ Used to: install js libraries on node (server-side)<br>
  
 #### package.json
  - it's a file where all the metadata about the project is saved
- - it also contains all the dependencies with their own compatibile versions
+ - it also contains all the dependencies with their own compatible versions
  - the `--save` flag makes npm automatically create the package.json file while installing a package
  - the `npm init` command manually creates the package.json file with all the info
  
 #### Routes
 - Used in Express to intercept http request and doing something in response
-- Route parameters allows to create patterns for custom routes
+- Route parameters allows creating patterns for custom routes
 - The * route matches every request that wasn't specified before
 
 #### Rendering HTML and Templates
@@ -42,3 +42,7 @@ Used to: install js libraries on node (server-side)<br>
 #### POST Requests
 - Post Routes
 - Body Parser
+
+#### Web APIs 
+- Application Programming Interfaces
+- They allow everyone to get data easily without having to scrape websites manually

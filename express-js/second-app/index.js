@@ -5,6 +5,7 @@
 let express = require("express");
 let app = express();
 
+//Allows to parse the body of form responses (for example)
 let bodyParser = require("body-parser");
 
 //Serves the content of the 'public' directory with the rest of the app
@@ -52,6 +53,7 @@ app.get("/waifus", function (req, res) {
 
 //Example of a POST route
 app.post("/addwaifu", function (req, res) {
+    //To parse the body of a request as a js object you need to first install a custom package called body-parser
     let newWaifu = req.body.name;
     waifus.push(newWaifu);
     res.redirect("/waifus")
