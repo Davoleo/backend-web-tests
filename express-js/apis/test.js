@@ -12,4 +12,4 @@ request('http://jsonplaceholder.typicode.com/users/1', (error, response, body) =
         //Template literals with a string (ES6)
         console.log(`${parsedBody.name} lives in ${parsedBody.address.city}`);
     }
-})
+});
