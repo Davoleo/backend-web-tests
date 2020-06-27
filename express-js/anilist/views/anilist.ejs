@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to Davoleo's Anilist</h1>
+            <p>Check out all the entries accurately rated and archived</p>
+
+            <p><a class="btn btn-primary btn-lg" href="/anilist/new">Add a new Anime</a></p>
+        </div>
+    </header>
+
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+        <div class="col-lg-12 mb-4  ">
+            <h3>Anime List</h3>
+        </div>
+
+        <% list.forEach((anime) =>  { %>
+            <div class="card col-md-3 col-sm-6">
+                <img class="card-img-top" src="<%= anime.image %>" alt="<%= anime.name %> Cover">
+                <div class="card-body">
+                    <h5 class="card-title"><%= anime.name %></h5>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- include("partials/footer")%>
