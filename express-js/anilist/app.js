@@ -5,6 +5,44 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+//Object Data Mapper (ODM) -> Allows to turn JS object to MongoDB model and schemas
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/anitest', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => console.log('Connected to DB!'))
+    .catch(error => console.log(error.message));
+
+const aniSchema = new mongoose.Schema({
+    name: String,
+    image: URL
+});
+
+const Anime = mongoose.model("Anime", aniSchema);
+
+//Make a new Anime and save it to the database instantly
+Anime.create({
+    name: "Angels of Death",
+    image: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx99629-BXyAJ6PDq4sr.jpg"
+}, function (error, anime) {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log(anime);
+    }
+});
+
+Anime.find({}, function (err, animes) {
+    if (err) {
+        console.error("Error retrieving anime list: ");
+        console.log(err);
+    } else {
+        console.log("Anime List: ");
+        console.log(animes);
+    }
+});
 
 const list = [
     {
