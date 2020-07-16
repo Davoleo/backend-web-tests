@@ -9,3 +9,4 @@
 - **db.%COLLECTION%.update(%CONDITION_OBJECT%, %OBJECT%)** (updates the object/s that match the CONDITION_OBJECT overwriting them with the OBJECT)
 - **db.%COLLECTION%.update(%CONDITION_OBJECT%, {$set: %OBJECT%})** (updates the object/s that match the CONDITION_OBJECT merging new data with the old one instead of overwriting the old data completely)
 - **db.%COLLECTION%.remove(%CONDITION_OBJECT%)** (removes the collection items that match the CONDITION_OBJECT)
+- **db.%COLLECTION%.drop()** (removes all the items from a collection)
