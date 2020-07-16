@@ -21,6 +21,7 @@
                 <img class="card-img-top" src="<%= anime.image %>" alt="<%= anime.name %> Cover">
                 <div class="card-body">
                     <h5 class="card-title"><%= anime.name %></h5>
+                    <a class="btn btn-primary" href="/anilist/<%= anime._id %>">More Info</a>
                 </div>
             </div>
         <% }); %>

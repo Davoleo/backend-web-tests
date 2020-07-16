@@ -46,3 +46,11 @@ Used to: install js libraries on node (server-side)<br>
 #### Web APIs 
 - Application Programming Interfaces
 - They allow everyone to get data easily without having to scrape websites manually
+
+#### RESTful Routes
+| Name | URL | Verb | Description |
+|----| -----| ------| ----------- |
+| index | /anilist | GET | Displays the list of all anime | 
+| new | /anilist/new | GET | Displays the form to submit a new anime |
+| create | /anilist | POST | Adds a new anime to the Database |
+| show | /anilist/id | GET | Shows the details of 1 anime |
