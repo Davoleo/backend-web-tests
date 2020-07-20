@@ -1,0 +1,20 @@
+<%- include("partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= blog.title %></div>
+    <div class="ui top attached">
+        <div class="item">
+            <img class="ui centered rounded image" src="<%= blog.image %>" alt="<%= blog.title %> image">
+            <div class="content">
+                <span><%= blog.created.toDateString() %></span>
+            </div>
+            <div class="description">
+                <!-- The dash instead of replacing the content directly it evaluates it as html first -->
+                <!-- This allows formatting but does not protect from script injection -->
+                <p><%- blog.body %></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer") %>
