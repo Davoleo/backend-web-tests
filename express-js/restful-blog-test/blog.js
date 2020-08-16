@@ -5,7 +5,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const expressSanitizer = require('express-sanitizer');
 
 //Express configuration
 const app = express();
@@ -13,6 +14,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 
 //Mongoose Connection
 mongoose.connect('mongodb://localhost:27017/restful_blog', {
@@ -63,6 +65,7 @@ app.get('/blogs/new', function (req, res) {
 
 //CREATE ROUTE
 app.post('/blogs', function (req, res) {
+    req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function (error, newBlog) {
         if (error) {
             res.render('new');
@@ -76,7 +79,7 @@ app.post('/blogs', function (req, res) {
 app.get('/blogs/:id', function (req, res) {
     Blog.findById(req.params.id, function (error, blog) {
         if (error) {
-            console.warn('NO');
+            console.warn('Show Route Error', error);
             res.redirect('/blogs');
         }
         else {
@@ -99,15 +102,28 @@ app.get('/blogs/:id/edit', function (req, res) {
 
 //UPDATE ROUTE
 app.put('/blogs/:id', function (req, res) {
-    Blog.findOneAndUpdate(req.params._id, req.body.blog, {new: true},function (error, updatedBlog) {
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    Blog.findOneAndUpdate(req.params.id, req.body.blog, null,function (error, updatedBlog) {
         if (error) {
             console.log('CATCHI')
             res.redirect('/blogs');
         }
         else {
-            res.render('show', {blog: updatedBlog});
+            res.redirect('/blogs/' + req.params.id);
         }
     })
+});
+
+//DESTROY ROUTE
+app.delete('/blogs/:id', function (req, res) {
+   Blog.findOneAndRemove(req.params.id, null, function (error) {
+      if (error) {
+          res.redirect('/blogs')
+      }
+      else {
+          res.redirect('/blogs');
+      }
+   });
 });
 
 app.listen(3333, function () {
