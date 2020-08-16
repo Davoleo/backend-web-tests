@@ -5,17 +5,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override')
 
 //Express configuration
 const app = express();
-app.set("view engine", "ejs")
-app.use(express.static("public"))
-app.use(bodyParser.urlencoded({ extended: true }))
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 //Mongoose Connection
 mongoose.connect('mongodb://localhost:27017/restful_blog', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 })
     .then(() => console.log('Connected to DB!'))
     .catch(error => console.log(error.message));
@@ -64,7 +67,7 @@ app.post('/blogs', function (req, res) {
         if (error) {
             res.render('new');
         } else {
-            res.redirect('/blogs')
+            res.redirect('/blogs');
         }
     });
 });
@@ -73,11 +76,37 @@ app.post('/blogs', function (req, res) {
 app.get('/blogs/:id', function (req, res) {
     Blog.findById(req.params.id, function (error, blog) {
         if (error) {
-            res.redirect('/blogs')
-        } else {
-            res.render('show', {blog: blog})
+            console.warn('NO');
+            res.redirect('/blogs');
+        }
+        else {
+            res.render('show', {blog: blog});
         }
     });
+});
+
+//EDIT ROUTE
+app.get('/blogs/:id/edit', function (req, res) {
+    Blog.findById(req.params.id, function (error, blog) {
+       if (error) {
+           res.redirect('/blogs')
+       }
+       else {
+           res.render('edit', {blog: blog})
+       }
+    });
+});
+
+app.put('/blogs/:id', function (req, res) {
+    Blog.findOneAndUpdate(req.params._id, req.body.blog, {new: true},function (error, updatedBlog) {
+        if (error) {
+            console.log('CATCHI')
+            res.redirect('/blogs');
+        }
+        else {
+            res.render('show', {blog: updatedBlog});
+        }
+    })
 });
 
 app.listen(3333, function () {
