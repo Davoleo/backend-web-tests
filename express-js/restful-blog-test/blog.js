@@ -97,6 +97,7 @@ app.get('/blogs/:id/edit', function (req, res) {
     });
 });
 
+//UPDATE ROUTE
 app.put('/blogs/:id', function (req, res) {
     Blog.findOneAndUpdate(req.params._id, req.body.blog, {new: true},function (error, updatedBlog) {
         if (error) {

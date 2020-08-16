@@ -3,9 +3,4 @@
 express-js/link.txt
 
 #node_modules directories
-/express-js/anilist/node_modules/
-/express-js/apis/node_modules/
-/express-js/basics/nodejs/package-test-app/node_modules/
-/express-js/first-app/node_modules/
-/express-js/second-app/node_modules/
-/express-js/restful-blog-test/node_modules/
+/express-js/node_modules
