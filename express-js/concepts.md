@@ -57,3 +57,17 @@ REST: a pattern that servers as mapping between HTTP routes and CRUD
 - `./` means begin in the folder we are currently in (current working directory) and traverse forward/downward in the tree.
 - `../` means go up one directory, then begin the traverse.
 
+#### Associations
+Database Elements that are associated with each other:
+- Users
+- Posts
+- Comments
+
+Types of associations:
+- one <-> one (one book has one publisher)
+- one <-> many (one user can have multiple posts)
+- many <-> many (students can signup to multiple courses and courses themselves can have multiple students)
+
+Two ways to associate entities:
+- Embedding Data
+- Referencing Data
