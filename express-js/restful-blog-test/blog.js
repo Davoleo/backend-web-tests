@@ -103,7 +103,7 @@ app.get('/blogs/:id/edit', function (req, res) {
 //UPDATE ROUTE
 app.put('/blogs/:id', function (req, res) {
     req.body.blog.body = req.sanitize(req.body.blog.body);
-    Blog.findOneAndUpdate(req.params.id, req.body.blog, null,function (error, updatedBlog) {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, null,function (error, updatedBlog) {
         if (error) {
             console.log('CATCHI')
             res.redirect('/blogs');
@@ -116,7 +116,7 @@ app.put('/blogs/:id', function (req, res) {
 
 //DESTROY ROUTE
 app.delete('/blogs/:id', function (req, res) {
-   Blog.findOneAndRemove(req.params.id, null, function (error) {
+   Blog.findByIdAndRemove(req.params.id, null, function (error) {
       if (error) {
           res.redirect('/blogs')
       }

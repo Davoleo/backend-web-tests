@@ -2,7 +2,9 @@
   "name": "express-js",
   "version": "1.0.0",
   "description": "A collection of Express projects to test stuff, also contains some http theory",
-  "scripts": {},
+  "scripts": {
+    "restful-blog": "cd restful-blog-test && nodemon blog.js"
+  },
   "author": "Davoleo",
   "license": "MIT",
   "dependencies": {
