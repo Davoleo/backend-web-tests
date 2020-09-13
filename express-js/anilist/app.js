@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost:27017/anitest', {
     .then(() => console.log('Connected to DB!'))
     .catch(error => console.log(error.message));
 
-seedDB();
+seedDB().catch(reason => console.log(reason));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');

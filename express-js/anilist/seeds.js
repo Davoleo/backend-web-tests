@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const Anime = require("./models/anime");
 const Comment   = require("./models/comment");
 
-const data = [
+const seeds = [
     {
         name: "Fruits Basket Season 2",
         image: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx111762-VsqqGAy7bdE1.jpg",
@@ -45,47 +45,29 @@ const data = [
             " year 2138 when virtual reality gaming is booming. Yggdrasil, a popular online game is quietly shut down one day. However, the protagonist Momonga decides to not log out. Momonga is then transformed into the image\n" +
             "of a skeleton as \"the mostpowerful wizard.\" The world continues to change, with non-player characters (NPCs) beginning to feel emotion. Having no parents, friends, or place in society, this ordinary young man Momonga then strives to take over the new world the game has become."
     }
-]
+];
 
-function seedDB(){
+async function seedDB(){
     //Remove all anime
-    Anime.remove({}, function(err){
-        if(err){
-            console.log(err);
-        }
-        console.log("removed campgrounds!");
-        Comment.remove({}, function(err) {
-            if(err){
-                console.log(err);
-            }
-            console.log("removed comments!");
-            //add default anime
-            data.forEach(function(seed){
-                Anime.create(seed, function(err, anime){
-                    if(err){
-                        console.log(err)
-                    } else {
-                        console.log("added a new anime");
-                        //create a comment
-                        Comment.create(
-                            {
-                                text: "Test Comment, pretty epic comment",
-                                author: "TestUser"
-                            }, function(err, comment){
-                                if(err){
-                                    console.log(err);
-                                } else {
-                                    anime.comments.push(comment);
-                                    anime.save();
-                                    console.log("Created new comment");
-                                }
-                            });
-                    }
-                });
+    await Anime.remove({});
+    console.log("Old Anime Removed");
+    await Comment.remove({});
+    console.log("Old Comments Removed");
+
+    for (const seed of seeds) {
+        const anime = await Anime.create(seed);
+        console.log("Created a new Anime");
+        const comment = await Comment.create(
+            {
+                text: "Test Comment, pretty epic comment",
+                author: "TestUser"
             });
-        });
-    });
-    //add a few comments
+        console.log("Created a new Comment");
+
+        anime.comments.push(comment);
+        anime.save();
+        console.log("Comment Added to Anime")
+    }
 }
 
 module.exports = seedDB;
