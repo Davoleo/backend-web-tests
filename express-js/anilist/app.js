@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 //Object Data Mapper (ODM) -> Allows to turn JS object to MongoDB model and schemas
 const mongoose = require('mongoose');
 const Anime = require('./models/anime');
+const Comment = require('./models/comment');
 const seedDB = require('./seeds')
 
 mongoose.connect('mongodb://localhost:27017/anitest', {
@@ -17,7 +18,7 @@ mongoose.connect('mongodb://localhost:27017/anitest', {
     .then(() => console.log('Connected to DB!'))
     .catch(error => console.log(error.message));
 
-seedDB().catch(reason => console.log(reason));
+//seedDB().catch(reason => console.log(reason));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
@@ -33,7 +34,7 @@ app.get('/anilist', function (req, res) {
         if (error) {
             console.log(error)
         } else {
-            res.render('anilist', {list: animes})
+            res.render('anime/index', {list: animes})
         }
     })
 });
@@ -57,7 +58,7 @@ app.post('/anilist', function (req, res) {
 
 //NEW - show the form to submit a new anime
 app.get('/anilist/new', function (req, res) {
-    res.render('new.ejs');
+    res.render('anime/new.ejs');
 });
 
 //SHOW - show detailed info about a specific anime
@@ -67,7 +68,40 @@ app.get('/anilist/:id', function (req, res) {
             console.error(error);
         } else {
             console.log(anime)
-            res.render('show', {anime: anime});
+            res.render('anime/show', {anime: anime});
+        }
+    });
+});
+
+//----- Comments routes -----
+app.get('/anilist/:id/comments/new', function (req, res) {
+    Anime.findById(req.params.id, function (error, anime) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.render("comment/new", {anime: anime});
+        }
+    });
+});
+
+app.post('/anilist/:id/comments', function (req, res) {
+    Anime.findById(req.params.id, function (error, anime) {
+        if (error) {
+            console.log(error);
+            res.redirect("/anilist")
+        }
+        else {
+            Comment.create(req.body.comment, function (error, comment) {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    anime.comments.push(comment);
+                    anime.save();
+                    res.redirect("/anilist/" + anime._id);
+                }
+            });
         }
     });
 });
