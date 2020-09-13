@@ -1,17 +1,44 @@
 <%- include("../partials/header") %>
 
-<h1>Anime Details</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Anilist</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
 
-<h2><%= anime.name %></h2>
-
-<img src="<%= anime.image %>" alt="<%= anime.name %>'s Thumbnail">
-
-<p><%= anime.description %></p>
-
-<p><a class="btn btn-success" href="/anilist/<%= anime._id %>/comments/new">Add Comment</a></p>
-
-<% anime.comments.forEach((comment) => { %>
-    <p><strong><%= comment.author %></strong> - <%= comment.text %></p>
-<% });%>
+        <div class="col-md-9">
+            <div class="card">
+                <img class="card-img-top" src="<%= anime.image %>" alt="<%= anime.name %>'s Thumbnail">
+                <div class="card-body">
+                    <h4 class="float-right">Episodes: 12</h4>
+                    <h4><a href="#"><%= anime.name %></a></h4>
+                    <p><%= anime.description %></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-right">
+                        <a class="btn btn-success" href="/anilist/<%= anime._id %>/comments/new">Add Comment</a>
+                    </div>
+                    <hr>
+                    <% anime.comments.forEach((comment) => { %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong><%= comment.author %></strong>
+                                <span class="float-right">10 days ago</span>
+                                <p><%= comment.text %></p>
+                            </div>
+                        </div>
+                    <% });%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%- include("../partials/footer") %>

@@ -1,0 +1,18 @@
+.card {
+    margin-bottom: 20px;
+}
+
+#list_row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-container {
+    width: 40%;
+    margin: 0 auto;
+}
+
+#copyright_paragraph {
+    text-align: center;
+    margin-top: 50px;
+}
