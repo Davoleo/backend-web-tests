@@ -1,7 +1,7 @@
 {
   "name": "express-js",
   "version": "1.0.0",
-  "description": "A collection of Express projects to test stuff, also contains some http theory",
+  "description": "A collection of Express projects to test stuff, also contains some more generic back-end dev theory",
   "scripts": {
     "restful-blog": "cd restful-blog-test && nodemon blog.js",
     "anilist": "cd anilist && nodemon app.js"

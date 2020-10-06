@@ -71,3 +71,12 @@ Types of associations:
 Two ways to associate entities:
 - Embedding Data
 - Referencing Data
+
+#### Authentication
+Packages:
+- Passport
+- Passport Local
+- Passport Local Mongoose
+
+Concept:
+- Session (A way to make HTML stateful instead of stateless)(Express-Session)
