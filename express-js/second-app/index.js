@@ -58,3 +58,7 @@ app.post("/addwaifu", function (req, res) {
     waifus.push(newWaifu);
     res.redirect("/waifus");
 });
+
+app.patch()
+
+app.listen(3333, () => console.log("Listening on port: " + 3333));
