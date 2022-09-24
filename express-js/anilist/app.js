@@ -31,13 +31,9 @@ app.get('/', function (req, res) {
 //INDEX - shows the anime list
 app.get('/anilist', function (req, res) {
     //Get anime from db
-    Anime.find({}, function (error, animes) {
-        if (error) {
-            console.log(error)
-        } else {
-            res.render('anime/index', {list: animes})
-        }
-    })
+    Anime.find({})
+        .then((animes) => res.render('anime/index', {list: animes}))
+        .catch(err => console.error(err));
 });
 
 //CREATE - add a new anime to database
@@ -47,14 +43,9 @@ app.post('/anilist', function (req, res) {
     const description = req.body.description;
     const anime = {name: name, image: imageUrl, description: description};
 
-    Anime.create(anime,
-        function (error, _) {
-        if (error) {
-            console.error(error);
-        } else {
-            res.redirect('/anilist');
-        }
-    });
+    Anime.create(anime)
+        .then(_ => res.redirect('/anilist'))
+        .catch(err => console.error(err))
 });
 
 //NEW - show the form to submit a new anime
@@ -64,47 +55,38 @@ app.get('/anilist/new', function (req, res) {
 
 //SHOW - show detailed info about a specific anime
 app.get('/anilist/:id', function (req, res) {
-    Anime.findById(req.params.id).populate("comments").exec(function (error, anime) {
-        if (error) {
-            console.error(error);
-        } else {
-            console.log(anime)
-            res.render('anime/show', {anime: anime});
-        }
-    });
+
+    Anime.findById(req.params.id)
+        .populate("comments")
+        .exec()
+        .then(function (anime) {
+            res.render('anime/show', {anime: anime})
+        })
+        .catch(err => console.error(err))
 });
 
 //----- Comments routes -----
 app.get('/anilist/:id/comments/new', function (req, res) {
-    Anime.findById(req.params.id, function (error, anime) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            res.render("comment/new", {anime: anime});
-        }
-    });
+    Anime.findById(req.params.id)
+        .then(anime => res.render('comment/new', {anime: anime}))
+        .catch(err => console.error(err));
 });
 
 app.post('/anilist/:id/comments', function (req, res) {
-    Anime.findById(req.params.id, function (error, anime) {
-        if (error) {
-            console.log(error);
-            res.redirect("/anilist")
-        }
-        else {
-            Comment.create(req.body.comment, function (error, comment) {
-                if (error) {
-                    console.log(error);
-                }
-                else {
+
+    Anime.findById(req.params.id)
+        .then(anime => {
+            Comment.create(req.body.comment)
+                .then(comment => {
                     anime.comments.push(comment);
                     anime.save();
                     res.redirect("/anilist/" + anime._id);
-                }
-            });
-        }
-    });
+                });
+        })
+        .catch(err => {
+            console.error(err);
+            res.redirect('/anilist');
+        })
 });
 
 app.listen(3333, function () {
